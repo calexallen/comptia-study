@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CompTIA A+ Study Hub</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --surface2: #1a2336;
+  --border: #1f2d45;
+  --accent: #00d4ff;
+  --accent2: #7c3aed;
+  --accent3: #10b981;
+  --warn: #f59e0b;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --mono: 'Space Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,14,23,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated grid background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 100%);
+}
+
+/* Glow orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.12;
+  animation: drift 8s ease-in-out infinite;
+}
+.orb-1 { width: 500px; height: 500px; background: var(--accent); top: -100px; left: -100px; animation-delay: 0s; }
+.orb-2 { width: 400px; height: 400px; background: var(--accent2); bottom: -80px; right: -80px; animation-delay: 3s; }
+.orb-3 { width: 300px; height: 300px; background: var(--accent3); top: 40%; left: 60%; animation-delay: 5s; }
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.25);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  position: relative;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.hero h1 {
+  font-size: clamp(40px, 7vw, 76px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin-bottom: 24px;
+  position: relative;
+}
+.hero h1 .line-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, #0099cc 50%, var(--accent2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 580px;
+  margin: 0 auto 44px;
+  font-weight: 400;
+  position: relative;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #0a0e17;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 0 0 0 rgba(0,212,255,0.4);
+}
+.btn-primary:hover {
+  background: #22e0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,212,255,0.3);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ── STATS ── */
+.stats-bar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 72px;
+}
+.stat {
+  text-align: center;
+  padding: 0 40px;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* ── SECTION WRAPPER ── */
+section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
+.section-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-tag::after {
+  content: '';
+  flex: 0 0 40px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+section h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+section .lead {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 600px;
+  margin-bottom: 56px;
+}
+
+/* ── COURSE CARDS ── */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.course-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+.course-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0,212,255,0.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+}
+.course-card.locked {
+  cursor: default;
+  opacity: 0.7;
+}
+.course-card.locked:hover {
+  transform: none;
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+/* Colored top accent bar */
+.course-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.course-card.core1::before { background: linear-gradient(90deg, var(--accent), #0066ff); }
+.course-card.core2::before { background: linear-gradient(90deg, var(--accent2), #ec4899); }
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.card-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+.core1 .card-icon { background: rgba(0,212,255,0.1); }
+.core2 .card-icon { background: rgba(124,58,237,0.1); }
+
+.card-status {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+.status-available {
+  background: rgba(16,185,129,0.12);
+  color: var(--accent3);
+  border: 1px solid rgba(16,185,129,0.3);
+}
+.status-coming {
+  background: rgba(245,158,11,0.1);
+  color: var(--warn);
+  border: 1px solid rgba(245,158,11,0.25);
+}
+
+.card-exam {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.card-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 28px;
+  flex: 1;
+}
+
+.card-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.topic-chip {
+  font-size: 11px;
+  font-family: var(--mono);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: var(--surface2);
+}
+
+.card-stats {
+  display: flex;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+.card-stat-num {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+}
+.core1 .card-stat-num { color: var(--accent); }
+.core2 .card-stat-num { color: #a78bfa; }
+.card-stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.core1 .card-link {
+  background: rgba(0,212,255,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(0,212,255,0.25);
+}
+.core1 .card-link:hover {
+  background: rgba(0,212,255,0.18);
+  transform: translateX(2px);
+}
+.card-link-locked {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--muted);
+  padding: 10px 20px;
+}
+.progress-bar {
+  height: 3px;
+  background: var(--surface2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent3), #34d399);
+}
+
+/* ── FEATURES SECTION ── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  transition: border-color 0.2s;
+}
+.feature-card:hover { border-color: rgba(0,212,255,0.25); }
+.feature-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: rgba(0,212,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+.feature-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.feature-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── ROADMAP SECTION ── */
+.roadmap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 48px;
+}
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.roadmap-col h3 {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.roadmap-col.active h3 { color: var(--accent); }
+.roadmap-col.upcoming h3 { color: var(--muted); }
+
+.roadmap-item {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.roadmap-item:last-child { border-bottom: none; }
+.roadmap-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.active .roadmap-dot { background: var(--accent3); }
+.upcoming .roadmap-dot { background: var(--border); border: 1px solid var(--muted); background: transparent; }
+.roadmap-item-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+.roadmap-item-desc {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px;
+  text-align: center;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.footer-note {
+  font-size: 13px;
+  color: var(--muted);
+}
+.footer-note span { color: var(--accent); }
+
+/* ── DIVIDER ── */
+.full-bleed-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  .stats-bar { flex-wrap: wrap; }
+  .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 32px; }
+  .stat:last-child { border-bottom: none; }
+  section { padding: 60px 24px; }
+  .roadmap { padding: 32px 24px; }
+  .roadmap-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">CompTIA A+ Hub</a>
+  <ul class="nav-links">
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="comptia_aplus_study_guide.html" style="color:var(--accent);">Open Core 1 →</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-badge">Interactive Study Platform</div>
+
+  <h1>
+    Pass Your<br>
+    <span class="line-accent">CompTIA A+</span><br>
+    With Confidence
+  </h1>
+
+  <p>
+    A complete, interactive study tool covering all domains of the CompTIA A+ 220-1201 exam.
+    Flashcards, section exams, and a 90-question cumulative — all in one place.
+  </p>
+
+  <div class="hero-cta">
+    <a href="comptia_aplus_study_guide.html" class="btn-primary">
+      Start Studying Core 1 →
+    </a>
+    <a href="#courses" class="btn-secondary">
+      View All Courses
+    </a>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num">203</div>
+      <div class="stat-label">Flashcards</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">151</div>
+      <div class="stat-label">Practice Questions</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Exam Domains</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">90</div>
+      <div class="stat-label">Question Cumulative</div>
+    </div>
+  </div>
+</div>
+
+<div class="full-bleed-divider"></div>
+
+<!-- ── COURSES ── -->
+<section id="courses">
+  <div class="section-tag">Courses</div>
+  <h2>CompTIA A+ Certification</h2>
+  <p class="lead">The A+ certification is split into two exams. Core 1 focuses on hardware and infrastructure. Core 2 covers operating systems, security, and software troubleshooting.</p>
+
+  <div class="courses-grid">
+
+    <!-- Core 1 Card -->
+    <a href="comptia_aplus_study_guide.html" class="course-card core1">
+      <div class="card-header">
+        <div class="card-icon">🖥️</div>
+        <span class="card-status status-available">Available Now</span>
+      </div>
+      <div class="card-exam">Exam 220-1201</div>
+      <div class="card-title">CompTIA A+ Core 1</div>
+      <div class="card-desc">
+        Master the hardware, networking, and infrastructure domains. Covers mobile devices, networking fundamentals, hardware components, virtualization, cloud computing, and hardware &amp; network troubleshooting.
+      </div>
+      <div class="card-topics">
+        <span class="topic-chip">Mobile Devices</span>
+        <span class="topic-chip">Networking</span>
+        <span class="topic-chip">Hardware</span>
+        <span class="topic-chip">Virtualization</span>
+        <span class="topic-chip">Cloud Computing</span>
+        <span class="topic-chip">Troubleshooting</span>
+      </div>
+      <div class="card-stats">
+        <div>
+          <div class="card-stat-num">203</div>
+          <div class="card-stat-label">Flashcards</div>
+        </div>
+        <div>
+          <div class="card-stat-num">151</div>
+          <div class="card-stat-label">Questions</div>
+        </div>
+        <div>
+          <div class="card-stat-num">5</div>
+          <div class="card-stat-label">Sections</div>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="card-link">Open Study Guide →</span>
+        <div style="text-align:right;">
+          <div style="font-size:11px;color:var(--accent3);font-family:var(--mono);margin-bottom:4px;">COMPLETE</div>
+          <div class="progress-bar" style="width:100px;">
+            <div class="progress-fill" style="width:100%;"></div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Core 2 Card -->
+    <div class="course-card core2 locked">
+      <div class="card-header">
+        <div class="card-icon">🔒</div>
+        <span class="card-status status-coming">Coming Soon</span>
+      </div>
+      <div class="card-exam">Exam 220-1202</div>
+      <div class="card-title">CompTIA A+ Core 2</div>
+      <div class="card-desc">
+        Deep-dive into operating systems, security, software troubleshooting, and operational procedures. Covers Windows, macOS, Linux, mobile OS, cybersecurity fundamentals, and scripting basics.
+      </div>
+      <div class="card-topics">
+        <span class="topic-chip">Operating Systems</span>
+        <span class="topic-chip">Security</span>
+        <span class="topic-chip">Software TS</span>
+        <span class="topic-chip">Windows OS</span>
+        <span class="topic-chip">macOS &amp; Linux</span>
+        <span class="topic-chip">Scripting</span>
+      </div>
+      <div class="card-stats">
+        <div>
+          <div class="card-stat-num" style="color:#a78bfa;">—</div>
+          <div class="card-stat-label">Flashcards</div>
+        </div>
+        <div>
+          <div class="card-stat-num" style="color:#a78bfa;">—</div>
+          <div class="card-stat-label">Questions</div>
+        </div>
+        <div>
+          <div class="card-stat-num" style="color:#a78bfa;">5</div>
+          <div class="card-stat-label">Sections</div>
+        </div>
+      </div>
+      <div class="card-cta">
+        <span class="card-link-locked">🔒 In Development</span>
+        <div style="text-align:right;">
+          <div style="font-size:11px;color:var(--warn);font-family:var(--mono);margin-bottom:4px;">PLANNED</div>
+          <div class="progress-bar" style="width:100px;">
+            <div class="progress-fill" style="width:0%;background:linear-gradient(90deg,var(--accent2),#ec4899);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-bleed-divider"></div>
+
+<!-- ── FEATURES ── -->
+<section id="features">
+  <div class="section-tag">Features</div>
+  <h2>Built for How You Actually Study</h2>
+  <p class="lead">No accounts, no subscriptions. Just open the file and start learning.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🃏</div>
+      <h3>Interactive Flashcards</h3>
+      <p>203 cards with smooth flip animations. Filter by section or topic. Shuffle at any time to break predictable patterns.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+      <h3>Per-Section Exams</h3>
+      <p>Take focused exams for each individual section, or mix it all together for the full 90-question cumulative practice test.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✅</div>
+      <h3>Instant Explanations</h3>
+      <p>Every practice question shows a detailed explanation immediately after answering, whether right or wrong.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Live Score Tracking</h3>
+      <p>Your score, correct count, incorrect count, and percentage update in real time as you answer each question.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗂️</div>
+      <h3>Smart Filtering</h3>
+      <p>Drill specific topics like DNS, RAID, or laser printer troubleshooting without wading through unrelated material.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3>Works Everywhere</h3>
+      <p>Fully responsive. Study on your laptop, tablet, or phone. Single HTML file — no internet connection required.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-bleed-divider"></div>
+
+<!-- ── ROADMAP ── -->
+<section id="roadmap">
+  <div class="section-tag">Roadmap</div>
+  <h2>What's Coming</h2>
+  <p class="lead">Core 1 is complete. Here's what's planned for Core 2 and beyond.</p>
+
+  <div class="roadmap">
+    <div class="roadmap-grid">
+
+      <div class="roadmap-col active">
+        <h3>✦ Completed — Core 1</h3>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Section 1: Mobile Devices</div>
+            <div class="roadmap-item-desc">33 flashcards · 15 questions</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Section 2: Networking</div>
+            <div class="roadmap-item-desc">68 flashcards · 34 questions</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Section 3: Hardware</div>
+            <div class="roadmap-item-desc">104 flashcards · 43 questions</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Section 4: Virtualization &amp; Cloud</div>
+            <div class="roadmap-item-desc">60 flashcards · 25 questions</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Section 5: Hardware &amp; Network Troubleshooting</div>
+            <div class="roadmap-item-desc">89 flashcards · 34 questions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="roadmap-col upcoming">
+        <h3>◌ Planned — Core 2</h3>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Section 1: Operating Systems</div>
+            <div class="roadmap-item-desc">Windows, macOS, Linux, Chrome OS, mobile OS</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Section 2: Security</div>
+            <div class="roadmap-item-desc">Threats, vulnerabilities, authentication, encryption</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Section 3: Software Troubleshooting</div>
+            <div class="roadmap-item-desc">OS and application issues, malware removal</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Section 4: Operational Procedures</div>
+            <div class="roadmap-item-desc">Safety, professionalism, change management, scripting</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <div class="roadmap-item-title">Full 90-Q Cumulative (Both Cores)</div>
+            <div class="roadmap-item-desc">Combined exam across all 9 domains</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">CompTIA A+ Study Hub</div>
+    <div class="footer-note">
+      Built as a portfolio project. Content aligned with <span>CompTIA A+ 220-1201</span> objectives.
+    </div>
+    <div class="footer-note" style="font-family:var(--mono);font-size:11px;">
+      Core 1 Complete &nbsp;·&nbsp; Core 2 In Progress
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
